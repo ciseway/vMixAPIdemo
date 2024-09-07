@@ -164,7 +164,9 @@ const AddGoal = new CronJob(
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest)+1).toString()
             jsonData.GameEvents.Game.ShotsGuest = (parseInt(jsonData.GameEvents.Game.ShotsGuest)+1).toString()
         }
-        let randomNumberSave = Math.floor(Math.random() * 6) + 1;;
+        let randomNumberSave = Math.floor(Math.random() * 6) + 1;
+        
+        //add save and shot to Home
         if(randomNumberSave === 3){
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Home)+1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home)+1).toString()
@@ -173,6 +175,7 @@ const AddGoal = new CronJob(
 
             
         }
+        //add save and shot to Guest
         if(randomNumberSave === 5){
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Guest)+1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest)+1).toString()
@@ -180,6 +183,8 @@ const AddGoal = new CronJob(
             jsonData.GameEvents.Game.SavesGuest = (parseInt(jsonData.GameEvents.Game.SavesGuest)+1).toString()
 
         }
+
+        
         console.log('==='+jsonData.GameEvents.Game.CurrentGameClock+'===')
         //push period 2
         if(jsonData.GameEvents.Game.CurrentGameClock === '05:00'){
