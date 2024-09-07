@@ -1963,9 +1963,9 @@
       },
       "Game": {
         "Id": "777182",
-        "TournamentGroupId": "14563",
+        "TournamentGroupId": "15931",
         "GroupNumber": "90215",
-        "GroupDisplayName": "Hockeyettan Norra",
+        "GroupDisplayName": "Kvalserie Norra till Hockeyettan",
         "GameNumber": "90215066",
         "GameDate": "2024-09-07",
         "GameTime": "16:00",
@@ -5504,7 +5504,7 @@
         "GamePreview": {
           "Show": "1",
           "GameId": "777182",
-          "GroupId": "14563",
+          "GroupId": "15931",
           "StatEntityId": "14784",
           "CreatedAt": "20231210 00:00:35",
           "Home": "Kalix HC",
@@ -5514,7 +5514,7 @@
           "VenueName": "PART Arena",
           "GameDate": "2023-12-10",
           "GameTime": "",
-          "GroupDisplayName": "Hockeyettan Norra",
+          "GroupDisplayName": "Kvalserie Norra till Hockeyettan",
           "Matchups": {
             "Matchup": [
               {
@@ -5542,7 +5542,7 @@
             "HeadToHead": {
               "Id": "777137",
               "Season": "2023-24",
-              "GroupDisplayName": "Hockeyettan Norra",
+              "GroupDisplayName": "Kvalserie Norra till Hockeyettan",
               "GameDate": "2023-10-29",
               "Venue": "Testebo Arena",
               "Home": "Strömsbro IF",
