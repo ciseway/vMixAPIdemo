@@ -1963,7 +1963,7 @@
       },
       "Game": {
         "Id": "777182",
-        "TournamentGroupId": "15931",
+        "TournamentGroupId": "14784",
         "GroupNumber": "90215",
         "GroupDisplayName": "Kvalserie Norra till Hockeyettan",
         "GameNumber": "90215066",
@@ -5504,7 +5504,7 @@
         "GamePreview": {
           "Show": "1",
           "GameId": "777182",
-          "GroupId": "15931",
+          "GroupId": "14784",
           "StatEntityId": "14784",
           "CreatedAt": "20231210 00:00:35",
           "Home": "Kalix HC",
