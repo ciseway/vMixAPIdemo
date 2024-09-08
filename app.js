@@ -190,7 +190,7 @@ const AddGoal = new CronJob(
         }
 
         //add penalty
-        if(randomNumberPenalty === 1 || randomNumberPenalty === 1){
+        if(randomNumberPenalty === 1 || randomNumberPenalty === 2 || randomNumberPenalty === 3){
           const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
           GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PIM = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PIM) + 2).toString()
           if(randomNumber === 1){
