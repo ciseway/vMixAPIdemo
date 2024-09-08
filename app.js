@@ -29,7 +29,11 @@ function resetJsonData() {
       console.error('Error parsing JSON data for reset:', parseErr);
       return;
     }
-
+    //nollställ loggen
+    fs.writeFile('log.txt', `Cron job executed at ${new Date().toLocaleTimeString()}\n`, (err) => {
+      if (err) throw err;
+      console.log('Log updated!');
+    });
     // Säkerhetskopiera den aktuella datan om det behövs
     fs.writeFile( path.join(__dirname, 'json', 'backup_m.json'), JSON.stringify(currentData, null, 2), (backupErr) => {
       if (backupErr) {
@@ -157,15 +161,16 @@ const AddGoal = new CronJob(
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home)+1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home)+1).toString()
             jsonData.GameEvents.Game.ShotsHome = (parseInt(jsonData.GameEvents.Game.ShotsHome)+1).toString()
-
         }else{
             jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest)+1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest)+1).toString()
             jsonData.GameEvents.Game.ShotsGuest = (parseInt(jsonData.GameEvents.Game.ShotsGuest)+1).toString()
         }
+
         let randomNumberSave = Math.floor(Math.random() * 6) + 1;
-        
+        let randomNumberPenalty = Math.floor(Math.random() * 7) + 1;
+        let randomNumberPpwePlay = Math.floor(Math.random() * 5) + 1;
         //add save and shot to Home
         if(randomNumberSave === 3){
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Saves.Home)+1).toString()
@@ -184,6 +189,27 @@ const AddGoal = new CronJob(
 
         }
 
+        //add penalty
+        if(randomNumberPenalty === 1){
+          const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
+          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PIM = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PIM) + 1).toString()
+          if(randomNumber === 1){
+            jsonData.GameEvents.Game.PimHome = (parseInt(jsonData.GameEvents.Game.PimHome) + 1).toString()
+          }else{
+            jsonData.GameEvents.Game.PimGuest = (parseInt(jsonData.GameEvents.Game.PimGuest) + 1).toString()
+          }
+        }
+
+        //add Powerplay
+        if(randomNumberPpwePlay === 1){
+          const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
+          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PPG = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PPG) + 1).toString()
+          if(randomNumber === 1){
+            jsonData.GameEvents.Game.PPPrcHome = (parseInt(jsonData.GameEvents.Game.PPPrcHome) + 5).toString()
+          }else{
+            jsonData.GameEvents.Game.PPPrcGuest = (parseInt(jsonData.GameEvents.Game.PPPrcGuest) + 5).toString()
+          }
+        }
 
         console.log('==='+jsonData.GameEvents.Game.CurrentGameClock+'===')
         //push period 2
