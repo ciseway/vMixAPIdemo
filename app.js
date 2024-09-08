@@ -145,7 +145,7 @@ const AddGoal = new CronJob(
           } else if(jsonData.GameEvents.Game.Periods.Period.length === 2){
             periodNr = 2
           }else{
-            periodNr = 3
+            periodNr = jsonData.GameEvents.Game.Periods.Period.length
           }
           //Add Goal and assist to players
           const RandomGoalScoreIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
@@ -299,7 +299,7 @@ const AddGoal = new CronJob(
             })
         }
         //matchen restartar gått en timme 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '60:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '60:00' || periodNr > 3){
             AddGoal.stop();
             resetJsonData();
             AddGoal.start();
