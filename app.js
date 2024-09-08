@@ -190,20 +190,20 @@ const AddGoal = new CronJob(
         }
 
         //add penalty
-        if(randomNumberPenalty === 1){
+        if(randomNumberPenalty === 1 || randomNumberPenalty === 1){
           const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
-          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PIM = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PIM) + 1).toString()
+          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PIM = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PIM) + 2).toString()
           if(randomNumber === 1){
-            jsonData.GameEvents.Game.PimHome = (parseInt(jsonData.GameEvents.Game.PimHome) + 1).toString()
+            jsonData.GameEvents.Game.PimHome = (parseInt(jsonData.GameEvents.Game.PimHome) + 2).toString()
           }else{
-            jsonData.GameEvents.Game.PimGuest = (parseInt(jsonData.GameEvents.Game.PimGuest) + 1).toString()
+            jsonData.GameEvents.Game.PimGuest = (parseInt(jsonData.GameEvents.Game.PimGuest) + 2).toString()
           }
         }
 
         //add Powerplay
-        if(randomNumberPpwePlay === 1){
+        if(randomNumberPpwePlay === 1 || randomNumberPpwePlay === 2){
           const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
-          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PPG = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PPG) + 1).toString()
+          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PPG = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PPG) + 5).toString()
           if(randomNumber === 1){
             jsonData.GameEvents.Game.PPPrcHome = (parseInt(jsonData.GameEvents.Game.PPPrcHome) + 5).toString()
           }else{
