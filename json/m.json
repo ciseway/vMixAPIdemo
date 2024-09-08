@@ -1963,7 +1963,7 @@
     },
     "Game": {
       "Id": "777182",
-      "TournamentGroupId": "14563",
+      "TournamentGroupId": "14784",
       "GroupNumber": "90215",
       "GroupDisplayName": "Hockeyettan Norra",
       "GameNumber": "90215066",
@@ -1976,7 +1976,7 @@
       "VenueId": "91336",
       "Spectators": "349",
       "OnlineStatus": "Final Score",
-      "CurrentGameClock": "03:00",
+      "CurrentGameClock": "35:00",
       "CurrentTimeInPeriod": "1200",
       "Intermission": "1",
       "CurrentGameSituation": "Final score",
@@ -1994,8 +1994,8 @@
       "HasGKSIP": "1",
       "HasCompletePenaltyTime": "1",
       "HasPlayerStatisticsSummary": "1",
-      "GoalsHome": "1",
-      "GoalsGuest": "2",
+      "GoalsHome": "20",
+      "GoalsGuest": "15",
       "SCGZoneAHome": "-",
       "SCGZoneAGuest": "-",
       "SCSPGZoneAHome": "-",
@@ -2004,12 +2004,12 @@
       "SCSOGZoneAGuest": "-",
       "SCSBLZoneAHome": "-",
       "SCSBLZoneAGuest": "-",
-      "ShotsHome": "2",
-      "ShotsGuest": "4",
+      "ShotsHome": "30",
+      "ShotsGuest": "21",
       "ShotsPrcHome": "0,00",
       "ShotsPrcGuest": "0,00",
-      "SavesHome": "1",
-      "SavesGuest": "2",
+      "SavesHome": "10",
+      "SavesGuest": "6",
       "SavesPrcHome": "0,0",
       "SavesPrcGuest": "0,00",
       "PimHome": "0",
@@ -2150,16 +2150,94 @@
             "Status": "3",
             "Length": "1200",
             "Goals": {
-              "Home": "1",
-              "Guest": "2"
+              "Home": "3",
+              "Guest": "3"
             },
             "Shots": {
+              "Home": "8",
+              "Guest": "3"
+            },
+            "Saves": {
+              "Home": "5",
+              "Guest": "0"
+            },
+            "PIM": {
+              "Home": "0",
+              "Guest": "0"
+            },
+            "FaceOff": {
+              "Home": "-",
+              "Guest": "-"
+            },
+            "Possession": {
+              "Home": "",
+              "PrcIntHome": "",
+              "Guest": "",
+              "PrcIntGuest": ""
+            },
+            "PossessionOff": {
+              "Home": "",
+              "Guest": ""
+            }
+          },
+          {
+            "Id": "2",
+            "Name": "2",
+            "PeriodType": "R",
+            "Starttime": "16:20",
+            "Endtime": "16:40",
+            "Status": "3",
+            "Length": "1200",
+            "Goals": {
               "Home": "2",
-              "Guest": "4"
+              "Guest": "3"
+            },
+            "Shots": {
+              "Home": "3",
+              "Guest": "5"
             },
             "Saves": {
               "Home": "1",
               "Guest": "2"
+            },
+            "PIM": {
+              "Home": "0",
+              "Guest": "0"
+            },
+            "FaceOff": {
+              "Home": "-",
+              "Guest": "-"
+            },
+            "Possession": {
+              "Home": "",
+              "PrcIntHome": "",
+              "Guest": "",
+              "PrcIntGuest": ""
+            },
+            "PossessionOff": {
+              "Home": "",
+              "Guest": ""
+            }
+          },
+          {
+            "Id": "3",
+            "Name": "3",
+            "PeriodType": "R",
+            "Starttime": "16:40",
+            "Endtime": "17:00",
+            "Status": "3",
+            "Length": "1200",
+            "Goals": {
+              "Home": "15",
+              "Guest": "9"
+            },
+            "Shots": {
+              "Home": "19",
+              "Guest": "13"
+            },
+            "Saves": {
+              "Home": "4",
+              "Guest": "4"
             },
             "PIM": {
               "Home": "0",
@@ -2882,7 +2960,7 @@
           {
             "PlayerId": "202861",
             "SkaterGame": {
-              "A": "0",
+              "A": "NaN",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -2999,13 +3077,13 @@
           {
             "PlayerId": "223446",
             "SkaterGame": {
-              "A": "1",
+              "A": "0",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3122,7 +3200,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3239,7 +3317,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3356,7 +3434,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3473,7 +3551,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3584,13 +3662,13 @@
           {
             "PlayerId": "250026",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3701,13 +3779,13 @@
           {
             "PlayerId": "203118",
             "SkaterGame": {
-              "A": "0",
+              "A": "4",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "1",
+              "G": "0",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3818,13 +3896,13 @@
           {
             "PlayerId": "238297",
             "SkaterGame": {
-              "A": "0",
+              "A": "3",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -3935,7 +4013,7 @@
           {
             "PlayerId": "215442",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -4052,13 +4130,13 @@
           {
             "PlayerId": "220699",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -4169,7 +4247,7 @@
           {
             "PlayerId": "266320",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -4292,7 +4370,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -4526,7 +4604,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -4637,7 +4715,7 @@
           {
             "PlayerId": "408321",
             "SkaterGame": {
-              "A": "0",
+              "A": "2",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -4760,7 +4838,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -4871,7 +4949,7 @@
           {
             "PlayerId": "378275",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -4988,13 +5066,13 @@
           {
             "PlayerId": "291382",
             "SkaterGame": {
-              "A": "0",
+              "A": "2",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -5105,13 +5183,13 @@
           {
             "PlayerId": "407815",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -5247,7 +5325,9 @@
               "L": "1",
               "GAA": "3,50"
             },
-            "SkaterGame": {},
+            "SkaterGame": {
+              "G": "NaN"
+            },
             "playerObject": {
               "Id": "277833",
               "TeamId": "104911",
@@ -5519,7 +5599,7 @@
           {
             "PlayerId": "252221",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -5642,7 +5722,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "3",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -5753,7 +5833,7 @@
           {
             "PlayerId": "235914",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -5876,7 +5956,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -5987,13 +6067,13 @@
           {
             "PlayerId": "249837",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -6104,13 +6184,13 @@
           {
             "PlayerId": "213272",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "2",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -6221,7 +6301,7 @@
           {
             "PlayerId": "234092",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -6338,7 +6418,7 @@
           {
             "PlayerId": "249604",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -6689,13 +6769,13 @@
           {
             "PlayerId": "216576",
             "SkaterGame": {
-              "A": "0",
+              "A": "NaN",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -6806,7 +6886,7 @@
           {
             "PlayerId": "262142",
             "SkaterGame": {
-              "A": "0",
+              "A": "1",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -6923,13 +7003,13 @@
           {
             "PlayerId": "248977",
             "SkaterGame": {
-              "A": "0",
+              "A": "2",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -7040,7 +7120,7 @@
           {
             "PlayerId": "370005",
             "SkaterGame": {
-              "A": "0",
+              "A": "2",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
@@ -7163,7 +7243,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -7508,13 +7588,13 @@
           {
             "PlayerId": "259596",
             "SkaterGame": {
-              "A": "1",
+              "A": "2",
               "FOLost": "0",
               "FOPct": "N/A",
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
@@ -7650,7 +7730,9 @@
               "L": "2",
               "GAA": "4,34"
             },
-            "SkaterGame": {},
+            "SkaterGame": {
+              "G": "NaN"
+            },
             "playerObject": {
               "Id": "266845",
               "TeamId": "104913",
@@ -7690,7 +7772,7 @@
       "GamePreview": {
         "Show": "1",
         "GameId": "777182",
-        "GroupId": "14563",
+        "GroupId": "14784",
         "StatEntityId": "14784",
         "CreatedAt": "20231210 00:00:35",
         "Home": "Kalix HC",
