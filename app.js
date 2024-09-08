@@ -101,7 +101,7 @@ app.get('/', (req, res) => {
 
 // Skapa cronjobbet
 const AddGoal = new CronJob(
-    '*/10 * * * * *', // Var tredje sekund (justera efter behov)
+    '* * * * *', // Var tredje sekund (justera efter behov)
     () => {
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
