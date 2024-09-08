@@ -273,7 +273,7 @@ const AddGoal = new CronJob(
             })
         }
         //matchen restartar gått en timme 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '60:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '15:00'){
             AddGoal.stop();
             resetJsonData();
             AddGoal.start();
