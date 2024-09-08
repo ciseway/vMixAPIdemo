@@ -213,7 +213,7 @@ const AddGoal = new CronJob(
 
         console.log('==='+jsonData.GameEvents.Game.CurrentGameClock+'===')
         //push period 2
-        if(jsonData.GameEvents.Game.CurrentGameClock === '05:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '20:00'){
             jsonData.GameEvents.Game.Periods.Period.push({
                 "Id": "2",
                 "Name": "2",
@@ -256,7 +256,7 @@ const AddGoal = new CronJob(
         }
 
         //push period 3
-        if(jsonData.GameEvents.Game.CurrentGameClock === '10:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '40:00'){
             console.log('period 3 pushad')
             jsonData.GameEvents.Game.Periods.Period.push({
                 "Id": "3",
@@ -299,7 +299,7 @@ const AddGoal = new CronJob(
             })
         }
         //matchen restartar gått en timme 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '15:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '60:00'){
             AddGoal.stop();
             resetJsonData();
             AddGoal.start();
