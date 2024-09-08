@@ -34,6 +34,7 @@ function resetJsonData() {
       if (err) throw err;
       console.log('Log updated!');
     });
+
     // Säkerhetskopiera den aktuella datan om det behövs
     fs.writeFile( path.join(__dirname, 'json', 'backup_m.json'), JSON.stringify(currentData, null, 2), (backupErr) => {
       if (backupErr) {
@@ -42,6 +43,7 @@ function resetJsonData() {
       }
       console.log('Backup of JSON data created successfully.');
       console.log(currentData.GameEvents.Game.CurrentGameClock)
+      console.log('SKRIVER ÖVER HÄR')
       
       // Skriv den nya datan till filen
       fs.writeFile(jsonFilePath, JSON.stringify(currentData, null, 2), (resetErr) => {
@@ -101,7 +103,7 @@ app.get('/', (req, res) => {
 
 // Skapa cronjobbet
 const AddGoal = new CronJob(
-    '* * * * *', // Var tredje sekund (justera efter behov)
+    '*/2 * * * * *', // Var tredje sekund (justera efter behov)
     () => {
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
@@ -156,6 +158,7 @@ const AddGoal = new CronJob(
           GamePlayers[RandomGoalScoreIndex].SkaterGame.G = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.G) + 1).toString()
           GamePlayers[RandomGoalAssistIndex].SkaterGame.A = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.A) + 1).toString()
           //Add goal to players team
+          console.log('Goals Home: '+jsonData.GameEvents.Game.GoalsHome)
         if(randomNumber === 1){
             jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
             jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home)+1).toString()
@@ -300,6 +303,7 @@ const AddGoal = new CronJob(
         }
         //matchen restartar gått en timme 
         if(jsonData.GameEvents.Game.CurrentGameClock === '60:00' || periodNr > 3){
+          console.log('STÄNGDE HÄR BÖRJAR DET')
             AddGoal.stop();
             resetJsonData();
             AddGoal.start();
