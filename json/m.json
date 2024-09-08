@@ -1976,7 +1976,7 @@
       "VenueId": "91336",
       "Spectators": "349",
       "OnlineStatus": "Final Score",
-      "CurrentGameClock": "35:00",
+      "CurrentGameClock": "36:00",
       "CurrentTimeInPeriod": "1200",
       "Intermission": "1",
       "CurrentGameSituation": "Final score",
@@ -1994,7 +1994,7 @@
       "HasGKSIP": "1",
       "HasCompletePenaltyTime": "1",
       "HasPlayerStatisticsSummary": "1",
-      "GoalsHome": "20",
+      "GoalsHome": "21",
       "GoalsGuest": "15",
       "SCGZoneAHome": "-",
       "SCGZoneAGuest": "-",
@@ -2004,12 +2004,12 @@
       "SCSOGZoneAGuest": "-",
       "SCSBLZoneAHome": "-",
       "SCSBLZoneAGuest": "-",
-      "ShotsHome": "30",
-      "ShotsGuest": "21",
+      "ShotsHome": "31",
+      "ShotsGuest": "22",
       "ShotsPrcHome": "0,00",
       "ShotsPrcGuest": "0,00",
       "SavesHome": "10",
-      "SavesGuest": "6",
+      "SavesGuest": "7",
       "SavesPrcHome": "0,0",
       "SavesPrcGuest": "0,00",
       "PimHome": "0",
@@ -2228,16 +2228,16 @@
             "Status": "3",
             "Length": "1200",
             "Goals": {
-              "Home": "15",
+              "Home": "16",
               "Guest": "9"
             },
             "Shots": {
-              "Home": "19",
-              "Guest": "13"
+              "Home": "20",
+              "Guest": "14"
             },
             "Saves": {
               "Home": "4",
-              "Guest": "4"
+              "Guest": "5"
             },
             "PIM": {
               "Home": "0",
@@ -4487,7 +4487,7 @@
               "FOPlusMinus": "0",
               "FOTotal": "0",
               "FOWon": "0",
-              "G": "0",
+              "G": "1",
               "HitsAgainst": "0",
               "HitsFor": "0",
               "MIP": "",
