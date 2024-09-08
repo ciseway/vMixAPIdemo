@@ -97,7 +97,7 @@ app.get('/', (req, res) => {
 
 // Skapa cronjobbet
 const AddGoal = new CronJob(
-    '*/1 * * * * *', // Var tredje sekund (justera efter behov)
+    '*/10 * * * * *', // Var tredje sekund (justera efter behov)
     () => {
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
@@ -184,7 +184,7 @@ const AddGoal = new CronJob(
 
         }
 
-        
+
         console.log('==='+jsonData.GameEvents.Game.CurrentGameClock+'===')
         //push period 2
         if(jsonData.GameEvents.Game.CurrentGameClock === '05:00'){
