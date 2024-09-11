@@ -10,6 +10,7 @@ const port = 3000;
 
 
 const jsonFilePath = path.join(__dirname, 'json', 'm.json');
+const jsonFilePath2 = path.join(__dirname, 'json', 'm2.json');
 const jsonFilePathEmpty = path.join(__dirname, 'json', 'emptyMatch.json');
 
 // Funktion för att nollställa data i JSON-filen
@@ -53,6 +54,13 @@ function resetJsonData() {
           console.log('JSON data has been reset to initial state.');
         }
       });
+      fs.writeFile(jsonFilePath2, JSON.stringify(currentData, null, 2), (resetErr) => {
+        if (resetErr) {
+          console.error('Error resetting JSON data:', resetErr);
+        } else {
+          console.log('JSON data has been reset to initial state.');
+        }
+      });
     });
   });
 }
@@ -88,6 +96,51 @@ const readJsonFile = (callback) => {
   });
 };
 
+const readJsonFile2_match = (callback) => {
+  const filePath = path.join(__dirname, 'json', 'm2.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      callback(err, null);
+      return;
+    }
+    try {
+      const GamePlayers = JSON.parse(data).GameEvents.Game.PlayerStatistics.PlayerStatistic;
+      const Players = JSON.parse(data).GameEvents.Codes.Players.Player;
+      const Teams = JSON.parse(data).GameEvents.Codes.Teams.Team;
+
+      GamePlayers.forEach((a)=>{
+        a.playerObject = Players.filter((b)=> b.Id === a.PlayerId)[0]
+        a.playerTeam = Teams.filter((b)=> b.Id === a.playerObject.TeamId)[0]
+        a.Position = a.playerObject.Position
+      })
+      callback(null, JSON.parse(data));
+    } catch (parseErr) {
+      console.error('Error parsing JSON:', parseErr);
+      callback(parseErr, null);
+    }
+  });
+};
+
+// Function to read a file and return a promise
+const readJsonFile2 = (filePath) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading file:', err);
+        reject(err);
+      } else {
+        try {
+          const parsedData = JSON.parse(data);
+          resolve(parsedData);
+        } catch (parseErr) {
+          console.error('Error parsing JSON:', parseErr);
+          reject(parseErr);
+        }
+      }
+    });
+  });
+};
 // Set up a route
 app.get('/', (req, res) => {
   readJsonFile((err, jsonData) => {
@@ -100,6 +153,63 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/round', async (req, res) => {
+  try {
+    const filePath1 = path.join(__dirname, 'json', 'm.json');
+    const filePath2 = path.join(__dirname, 'json', 'm2.json');
+
+    // Read both files asynchronously
+    const [jsonData1, jsonData2] = await Promise.all([
+      readJsonFile2(filePath1),
+      readJsonFile2(filePath2)
+    ]);
+
+    // Combine or use the data from both files as needed
+    var serialName = 'Hockeyettan demo 2024';
+    var newObject = {};
+    var newarray = [];
+    const Teams = jsonData1.GameEvents.Codes.Teams.Team;
+    var index = 0;
+
+    newObject["G1Result.Text"] = jsonData1.GameEvents.Game.GoalsHome +' - ' + jsonData1.GameEvents.Game.GoalsGuest;
+
+    newObject["Headline.Text"] = 'DAGENS MATCHER HOCKEYETTAN 2024';
+    newObject["G1HomeName.Text"] = Teams[0].ClubPreferredName || Teams[0].Name;
+    newObject["G1AwayName.Text"] = Teams[1].ClubPreferredName || Teams[1].Name;
+
+    newObject["G1HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/' + Teams[0].Shortname + '.png';
+    newObject["G1AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
+    newObject["G1Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
+
+
+    newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GoalsHome +' - ' + jsonData2.GameEvents.Game.GoalsGuest;
+    newObject["G2HomeName.Text"] = 'Hudiksvalls HC';
+    newObject["G2AwayName.Text"] = 'Kiruna IF';
+    newObject["G2HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/HUD.png';
+    newObject["G2AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/KIR.png';
+    newObject["G2Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
+
+
+
+    if (2 < 6) {
+      for (let index = 2; index <= 6; index++) {
+        newObject["G" + (index + 1) + "Result.Text"] = '';
+        newObject["G" + (index + 1) + "HomeName.Text"] = '';
+        newObject["G" + (index + 1) + "AwayName.Text"] = '';
+        newObject["G" + (index + 1) + "HomeLogo.Source"] = '';
+        newObject["G" + (index + 1) + "AwayLogo.Source"] = '';
+        newObject["G" + (index + 1) + "Background.Source"] =
+          'https://vmix.hockeyettan.se/scoreImages/=TOM LOGO.png';
+      }
+    }
+    newarray.push(newObject);
+
+    // Send combined data as JSON response
+    res.json(newarray);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to read JSON files' });
+  }
+});
 
 // Skapa cronjobbet
 const AddGoal = new CronJob(
@@ -331,6 +441,54 @@ const AddGoal = new CronJob(
   AddGoal.start();
   
 
+
+  const AddGoal2 = new CronJob(
+    '*/3 * * * * *', // Var tredje sekund (justera efter behov)
+    () => {
+      console.log('Cron job executed at', new Date().toLocaleTimeString());
+  
+  
+      // Läs JSON-filen
+      readJsonFile2_match((err, jsonData) => {
+        if (err) {
+          console.error('Error reading JSON in cron job:', err);
+        } else {
+          let GamePlayers = jsonData.GameEvents.Game.PlayerStatistics.PlayerStatistic;
+          const Players = jsonData.GameEvents.Codes.Players.Player;
+          const Teams = jsonData.GameEvents.Codes.Teams.Team;
+          let randomNumber = Math.floor(Math.random() * 2) + 1;
+          if(randomNumber === 1){
+            jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
+            }else{
+                jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
+            }
+        
+        //matchen restartar gått en timme 
+        if(jsonData.GameEvents.Game.CurrentGameClock === '59:00'){
+          console.log('STÄNGDE HÄR BÖRJAR DET')
+            AddGoal2.stop();
+            resetJsonData();
+            AddGoal2.start();
+        }
+        jsonData.GameEvents.Game.CurrentGameClock = moment(jsonData.GameEvents.Game.CurrentGameClock, "mm:ss");
+        jsonData.GameEvents.Game.CurrentGameClock = jsonData.GameEvents.Game.CurrentGameClock.add(1, 'minutes').format('mm:ss');
+
+
+          fs.writeFile(jsonFilePath2, JSON.stringify(jsonData, null, 2), (resetErr) => {
+            if (resetErr) {
+              console.error('Error resetting JSON data:', resetErr);
+            } else {
+              console.log('1 Goal added for ');
+            }
+          });
+        }
+      });
+    },
+    null,
+    false, // Börja inte jobba direkt
+    'Europe/Stockholm' // Tidszon för jobbet
+  );
+  AddGoal2.start();
 
   // Ställ in en timer för att stoppa cronjobbet efter en viss tid
   setTimeout(() => {
