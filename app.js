@@ -443,7 +443,7 @@ const AddGoal = new CronJob(
 
 
   const AddGoal2 = new CronJob(
-    '*/3 * * * * *', // Var tredje sekund (justera efter behov)
+    '*/20 * * * * *', // Var tredje sekund (justera efter behov)
     () => {
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
