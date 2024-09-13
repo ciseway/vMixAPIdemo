@@ -1983,7 +1983,7 @@
         "IsInterrupted": "0",
         "IsPosponed": "0",
         "HasStartingPlayers": "1",
-        "IsStarted": "1",
+        "IsStarted": "0",
         "IsEnded": "0",
         "IsOfficial": "1",
         "HasLiveSOG": "0",

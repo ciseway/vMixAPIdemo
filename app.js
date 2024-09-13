@@ -180,9 +180,24 @@ app.get('/round', async (req, res) => {
     newObject["G1HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/' + Teams[0].Shortname + '.png';
     newObject["G1AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
     newObject["G1Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
+    console.log('status är :'+jsonData1.GameEvents.Game.IsStarted)
+    newObject["G1Result.Text"] = '-';
+    newObject["G2Result.Text"] = '-';
+
+    if(jsonData1.GameEvents.Game.IsStarted === '1' && jsonData1.GameEvents.Game.IsEnded === '0'){
+      newObject["G1Result.Text"] = '('+jsonData1.GameEvents.Game.GoalsHome +' - ' + jsonData1.GameEvents.Game.GoalsGuest+')';
+    }
+    if(jsonData1.GameEvents.Game.IsEnded === '1'){
+      newObject["G1Result.Text"] = jsonData1.GameEvents.Game.GoalsHome +' - ' + jsonData1.GameEvents.Game.GoalsGuest;
+    }
 
 
-    newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GoalsHome +' - ' + jsonData2.GameEvents.Game.GoalsGuest;
+    if(jsonData2.GameEvents.Game.IsStarted === '1' && jsonData2.GameEvents.Game.IsEnded === '0'){
+      newObject["G2Result.Text"] = '('+jsonData2.GameEvents.Game.GoalsHome +' - ' + jsonData2.GameEvents.Game.GoalsGuest+')';
+    }
+    if(jsonData2.GameEvents.Game.IsEnded === '1'){
+      newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GoalsHome +' - ' + jsonData2.GameEvents.Game.GoalsGuest;
+    }
     newObject["G2HomeName.Text"] = 'Hudiksvalls HC';
     newObject["G2AwayName.Text"] = 'Kiruna IF';
     newObject["G2HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/HUD.png';
@@ -231,7 +246,7 @@ const AddGoal = new CronJob(
           let GamePlayers = jsonData.GameEvents.Game.PlayerStatistics.PlayerStatistic;
           const Players = jsonData.GameEvents.Codes.Players.Player;
           const Teams = jsonData.GameEvents.Codes.Teams.Team;
-    
+          jsonData.GameEvents.Game.IsStarted = '1'
           GamePlayers.forEach((a)=>{
             a.playerObject = Players.filter((b)=> b.Id === a.PlayerId)[0]
             a.playerTeam = Teams.filter((b)=> b.Id === a.playerObject.TeamId)[0]
@@ -418,6 +433,11 @@ const AddGoal = new CronJob(
             resetJsonData();
             AddGoal.start();
         }
+        //ändra match status 
+        if(jsonData.GameEvents.Game.CurrentGameClock === '58:00'){
+          jsonData.GameEvents.Game.IsStarted = '0'
+          jsonData.GameEvents.Game.IsEnded = '1'
+        }
         jsonData.GameEvents.Game.CurrentGameClock = moment(jsonData.GameEvents.Game.CurrentGameClock, "mm:ss");
         jsonData.GameEvents.Game.CurrentGameClock = jsonData.GameEvents.Game.CurrentGameClock.add(1, 'minutes').format('mm:ss');
 
@@ -443,7 +463,7 @@ const AddGoal = new CronJob(
 
 
   const AddGoal2 = new CronJob(
-    '*/20 * * * * *', // Var tredje sekund (justera efter behov)
+    '*/30 * * * * *', // Var tredje sekund (justera efter behov)
     () => {
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
@@ -457,11 +477,18 @@ const AddGoal = new CronJob(
           const Players = jsonData.GameEvents.Codes.Players.Player;
           const Teams = jsonData.GameEvents.Codes.Teams.Team;
           let randomNumber = Math.floor(Math.random() * 2) + 1;
+          jsonData.GameEvents.Game.IsStarted = '1'
+
           if(randomNumber === 1){
             jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
-            }else{
+          }else{
                 jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
-            }
+          }
+
+          if(jsonData.GameEvents.Game.CurrentGameClock === '58:00'){
+            jsonData.GameEvents.Game.IsStarted = '0'
+            jsonData.GameEvents.Game.IsEnded = '1'
+          }
         
         //matchen restartar gått en timme 
         if(jsonData.GameEvents.Game.CurrentGameClock === '59:00'){
