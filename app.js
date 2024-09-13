@@ -181,8 +181,8 @@ app.get('/round', async (req, res) => {
     newObject["G1AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
     newObject["G1Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
     console.log('status är :'+jsonData1.GameEvents.Game.IsStarted)
-    newObject["G1Result.Text"] = '-';
-    newObject["G2Result.Text"] = '-';
+    newObject["G1Result.Text"] = jsonData1.GameEvents.Game.GameTime;
+    newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GameTime;
 
     if(jsonData1.GameEvents.Game.IsStarted === '1' && jsonData1.GameEvents.Game.IsEnded === '0'){
       newObject["G1Result.Text"] = '('+jsonData1.GameEvents.Game.GoalsHome +' - ' + jsonData1.GameEvents.Game.GoalsGuest+')';
