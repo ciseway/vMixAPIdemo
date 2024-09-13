@@ -247,6 +247,9 @@ const AddGoal = new CronJob(
           const Players = jsonData.GameEvents.Codes.Players.Player;
           const Teams = jsonData.GameEvents.Codes.Teams.Team;
           jsonData.GameEvents.Game.IsStarted = '1'
+          const momentTime = moment.duration(jsonData.GameEvents.Game.CurrentGameClock); // Convert time string to a moment duration
+          const totalMinutes = momentTime.asHours();
+
           GamePlayers.forEach((a)=>{
             a.playerObject = Players.filter((b)=> b.Id === a.PlayerId)[0]
             a.playerTeam = Teams.filter((b)=> b.Id === a.playerObject.TeamId)[0]
@@ -284,17 +287,20 @@ const AddGoal = new CronJob(
           GamePlayers[RandomGoalAssistIndex].SkaterGame.A = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.A) + 1).toString()
           //Add goal to players team
           console.log('Goals Home: '+jsonData.GameEvents.Game.GoalsHome)
-        if(randomNumber === 1){
-            jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
-            jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home)+1).toString()
-            jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home)+1).toString()
-            jsonData.GameEvents.Game.ShotsHome = (parseInt(jsonData.GameEvents.Game.ShotsHome)+1).toString()
-        }else{
-            jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
-            jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest)+1).toString()
-            jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest)+1).toString()
-            jsonData.GameEvents.Game.ShotsGuest = (parseInt(jsonData.GameEvents.Game.ShotsGuest)+1).toString()
-        }
+          if(totalMinutes > 0){
+            if(randomNumber === 1){
+                jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
+                jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Home)+1).toString()
+                jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Home)+1).toString()
+                jsonData.GameEvents.Game.ShotsHome = (parseInt(jsonData.GameEvents.Game.ShotsHome)+1).toString()
+            }else{
+                jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
+                jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Goals.Guest)+1).toString()
+                jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest = (parseInt(jsonData.GameEvents.Game.Periods.Period[periodNr-1].Shots.Guest)+1).toString()
+                jsonData.GameEvents.Game.ShotsGuest = (parseInt(jsonData.GameEvents.Game.ShotsGuest)+1).toString()
+            }       
+          }
+
 
         let randomNumberSave = Math.floor(Math.random() * 6) + 1;
         let randomNumberPenalty = Math.floor(Math.random() * 7) + 1;
@@ -478,12 +484,19 @@ const AddGoal = new CronJob(
           const Teams = jsonData.GameEvents.Codes.Teams.Team;
           let randomNumber = Math.floor(Math.random() * 2) + 1;
           jsonData.GameEvents.Game.IsStarted = '1'
+          
+          const momentTime = moment.duration(jsonData.GameEvents.Game.CurrentGameClock); // Convert time string to a moment duration
+          const totalMinutes = momentTime.asHours();
 
-          if(randomNumber === 1){
-            jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
-          }else{
-                jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
+          console.log(totalMinutes)
+          if(totalMinutes > 0){
+            if(randomNumber === 1){
+              jsonData.GameEvents.Game.GoalsHome = (parseInt(jsonData.GameEvents.Game.GoalsHome) + 1).toString()
+            }else{
+                  jsonData.GameEvents.Game.GoalsGuest = (parseInt(jsonData.GameEvents.Game.GoalsGuest) + 1).toString()
+            }
           }
+
 
           if(jsonData.GameEvents.Game.CurrentGameClock === '58:00'){
             jsonData.GameEvents.Game.IsStarted = '0'
