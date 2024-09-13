@@ -347,7 +347,7 @@ const AddGoal = new CronJob(
 
         console.log('==='+jsonData.GameEvents.Game.CurrentGameClock+'===')
         //push period 2
-        if(jsonData.GameEvents.Game.CurrentGameClock === '20:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '10:00'){
             jsonData.GameEvents.Game.Periods.Period.push({
                 "Id": "2",
                 "Name": "2",
@@ -390,7 +390,7 @@ const AddGoal = new CronJob(
         }
 
         //push period 3
-        if(jsonData.GameEvents.Game.CurrentGameClock === '40:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '20:00'){
             console.log('period 3 pushad')
             jsonData.GameEvents.Game.Periods.Period.push({
                 "Id": "3",
@@ -433,14 +433,14 @@ const AddGoal = new CronJob(
             })
         }
         //matchen restartar gått en timme 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '59:00' || periodNr > 3){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '30:00' || periodNr > 3){
           console.log('STÄNGDE HÄR BÖRJAR DET')
             AddGoal.stop();
             resetJsonData();
             AddGoal.start();
         }
         //ändra match status 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '58:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '29:00'){
           jsonData.GameEvents.Game.IsStarted = '0'
           jsonData.GameEvents.Game.IsEnded = '1'
         }
@@ -498,13 +498,13 @@ const AddGoal = new CronJob(
           }
 
 
-          if(jsonData.GameEvents.Game.CurrentGameClock === '58:00'){
+          if(jsonData.GameEvents.Game.CurrentGameClock === '29:00'){
             jsonData.GameEvents.Game.IsStarted = '0'
             jsonData.GameEvents.Game.IsEnded = '1'
           }
         
         //matchen restartar gått en timme 
-        if(jsonData.GameEvents.Game.CurrentGameClock === '59:00'){
+        if(jsonData.GameEvents.Game.CurrentGameClock === '30:00'){
           console.log('STÄNGDE HÄR BÖRJAR DET')
             AddGoal2.stop();
             resetJsonData();
@@ -534,13 +534,15 @@ const AddGoal = new CronJob(
   setTimeout(() => {
     console.log('Stopping the cron job');
     AddGoal.stop(); // Stoppa cronjobbet
-  }, 60 * 60 * 1000); // Stoppa efter 60 sekunder (1 minut)
+    AddGoal2.stop(); // Stoppa cronjobbet
+  }, 30 * 60 * 1000); // Stoppa efter 60 sekunder (1 minut)
   
   // Ställ in en timer för att starta om cronjobbet efter ytterligare en viss tid
   setTimeout(() => {
     console.log('Restarting the cron job');
     AddGoal.start(); // Starta om cronjobbet
-  }, 61 * 60 * 1000); // Starta om efter 120 sekunder (2 minuter)
+    AddGoal2.start(); // Starta om cronjobbet
+  }, 31 * 60 * 1000); // Starta om efter 120 sekunder (2 minuter)
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
