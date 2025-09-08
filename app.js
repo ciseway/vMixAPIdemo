@@ -177,15 +177,15 @@ app.get('/round', async (req, res) => {
     newObject["G1HomeName.Text"] = Teams[0].ClubPreferredName || Teams[0].Name;
     newObject["G1AwayName.Text"] = Teams[1].ClubPreferredName || Teams[1].Name;
 
-    newObject["G1HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/' + Teams[0].Shortname + '.png';
-    newObject["G1AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
+    newObject["G1HomeLogo.Source"] ='https://vmix-new.hockeyettan.se/scoreImages/' + Teams[0].Shortname + '.png';
+    newObject["G1AwayLogo.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
 
-    newObject["G1LogoHome.Source"] ='https://vmix.hockeyettan.se/premagesLogo/' + Teams[0].Shortname.toUpperCase() + '.png';
-    newObject["G1LogoAway.Source"] = 'https://vmix.hockeyettan.se/premagesLogo/' + Teams[1].Shortname.toUpperCase() + '.png';
+    newObject["G1LogoHome.Source"] ='https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[0].Shortname.toUpperCase() + '.png';
+    newObject["G1LogoAway.Source"] = 'https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[1].Shortname.toUpperCase() + '.png';
 
 
 
-    newObject["G1Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
+    newObject["G1Background.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/skylt.png';
     console.log('status är :'+jsonData1.GameEvents.Game.IsStarted)
     newObject["G1Result.Text"] = jsonData1.GameEvents.Game.GameTime;
     newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GameTime;
@@ -206,14 +206,14 @@ app.get('/round', async (req, res) => {
     }
     newObject["G2HomeName.Text"] = 'Hudiksvalls HC';
     newObject["G2AwayName.Text"] = 'Kiruna IF';
-    newObject["G2HomeLogo.Source"] ='https://vmix.hockeyettan.se/scoreImages/HUD.png';
-    newObject["G2AwayLogo.Source"] = 'https://vmix.hockeyettan.se/scoreImages/KIR.png';
+    newObject["G2HomeLogo.Source"] ='https://vmix-new.hockeyettan.se/scoreImages/HUD.png';
+    newObject["G2AwayLogo.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/KIR.png';
 
-    newObject["G2LogoHome.Source"] ='https://vmix.hockeyettan.se/premagesLogo/' + Teams[0].Shortname.toUpperCase() + '.png';
-    newObject["G2LogoAway.Source"] = 'https://vmix.hockeyettan.se/premagesLogo/' + Teams[1].Shortname.toUpperCase() + '.png';
+    newObject["G2LogoHome.Source"] ='https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[0].Shortname.toUpperCase() + '.png';
+    newObject["G2LogoAway.Source"] = 'https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[1].Shortname.toUpperCase() + '.png';
 
 
-    newObject["G2Background.Source"] = 'https://vmix.hockeyettan.se/scoreImages/skylt.png';
+    newObject["G2Background.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/skylt.png';
 
 
 
@@ -227,7 +227,7 @@ app.get('/round', async (req, res) => {
         newObject["G" + (index + 1) + "LogoHome.Source"] = '';
         newObject["G" + (index + 1) + "LogoAway.Source"] = '';
         newObject["G" + (index + 1) + "Background.Source"] =
-          'https://vmix.hockeyettan.se/scoreImages/=TOM LOGO.png';
+          'https://vmix-new.hockeyettan.se/scoreImages/=TOM LOGO.png';
       }
     }
     newarray.push(newObject);
