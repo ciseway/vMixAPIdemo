@@ -227,6 +227,8 @@ app.get('/round', async (req, res) => {
       for (let index = 2; index <= 6; index++) {
         newObject["G" + (index + 1) + "Result.Text"] = '';
         newObject["G" + (index + 1) + "HomeName.Text"] = '';
+        newObject["G" + (index + 1) + "NameAway.Text"] = '';
+        newObject["G" + (index + 1) + "NameHome.Text"] = '';
         newObject["G" + (index + 1) + "AwayName.Text"] = '';
         newObject["G" + (index + 1) + "HomeLogo.Source"] = '';
         newObject["G" + (index + 1) + "AwayLogo.Source"] = '';
