@@ -177,6 +177,9 @@ app.get('/round', async (req, res) => {
     newObject["G1HomeName.Text"] = Teams[0].ClubPreferredName || Teams[0].Name;
     newObject["G1AwayName.Text"] = Teams[1].ClubPreferredName || Teams[1].Name;
 
+    newObject["G1NameHome.Text"] = Teams[0].Shortname || Teams[0].Name;
+    newObject["G1NameAway.Text"] = Teams[1].Shortname || Teams[1].Name;
+
     newObject["G1HomeLogo.Source"] ='https://vmix-new.hockeyettan.se/scoreImages/' + Teams[0].Shortname + '.png';
     newObject["G1AwayLogo.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/' + Teams[1].Shortname + '.png';
 
@@ -205,7 +208,10 @@ app.get('/round', async (req, res) => {
       newObject["G2Result.Text"] = jsonData2.GameEvents.Game.GoalsHome +' - ' + jsonData2.GameEvents.Game.GoalsGuest;
     }
     newObject["G2HomeName.Text"] = 'Hudiksvalls HC';
+    newObject["G2NameAway.Text"] = 'KIR';
+    newObject["G2NameHome.Text"] = 'HUD';
     newObject["G2AwayName.Text"] = 'Kiruna IF';
+
     newObject["G2HomeLogo.Source"] ='https://vmix-new.hockeyettan.se/scoreImages/HUD.png';
     newObject["G2AwayLogo.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/KIR.png';
 
