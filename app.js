@@ -215,8 +215,8 @@ app.get('/round', async (req, res) => {
     newObject["G2HomeLogo.Source"] ='https://vmix-new.hockeyettan.se/scoreImages/HUD.png';
     newObject["G2AwayLogo.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/KIR.png';
 
-    newObject["G2LogoHome.Source"] ='https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[0].Shortname.toUpperCase() + '.png';
-    newObject["G2LogoAway.Source"] = 'https://vmix-new.hockeyettan.se/premagesLogo/' + Teams[1].Shortname.toUpperCase() + '.png';
+    newObject["G2LogoHome.Source"] ='https://vmix-new.hockeyettan.se/premagesLogo/HUD.png';
+    newObject["G2LogoAway.Source"] = 'https://vmix-new.hockeyettan.se/premagesLogo/KIR.png';
 
 
     newObject["G2Background.Source"] = 'https://vmix-new.hockeyettan.se/scoreImages/skylt.png';
