@@ -12,9 +12,10 @@ const port = 3000;
 const jsonFilePath = path.join(__dirname, 'json', 'm.json');
 const jsonFilePath2 = path.join(__dirname, 'json', 'm2.json');
 const jsonFilePathEmpty = path.join(__dirname, 'json', 'emptyMatch.json');
+const logFilePath = path.join(__dirname, 'log.txt');
 
 // Funktion för att nollställa data i JSON-filen
-function resetJsonData() {
+function resetJsonData(targets = [jsonFilePath, jsonFilePath2]) {
   // Läs den aktuella datan från JSON-filen
   fs.readFile(jsonFilePathEmpty, 'utf8', (err, data) => {
     if (err) {
@@ -31,8 +32,8 @@ function resetJsonData() {
       return;
     }
     //nollställ loggen
-    fs.writeFile('log.txt', `Cron job executed at ${new Date().toLocaleTimeString()}\n`, (err) => {
-      if (err) throw err;
+    fs.writeFile(logFilePath, `Cron job executed at ${new Date().toLocaleTimeString()}\n`, (err) => {
+      if (err) return console.error('Error writing log:', err);
       console.log('Log updated!');
     });
 
@@ -46,20 +47,15 @@ function resetJsonData() {
       console.log(currentData.GameEvents.Game.CurrentGameClock)
       console.log('SKRIVER ÖVER HÄR')
       
-      // Skriv den nya datan till filen
-      fs.writeFile(jsonFilePath, JSON.stringify(currentData, null, 2), (resetErr) => {
-        if (resetErr) {
-          console.error('Error resetting JSON data:', resetErr);
-        } else {
-          console.log('JSON data has been reset to initial state.');
-        }
-      });
-      fs.writeFile(jsonFilePath2, JSON.stringify(currentData, null, 2), (resetErr) => {
-        if (resetErr) {
-          console.error('Error resetting JSON data:', resetErr);
-        } else {
-          console.log('JSON data has been reset to initial state.');
-        }
+      // Skriv den nya datan till de filer som ska nollställas
+      targets.forEach((target) => {
+        fs.writeFile(target, JSON.stringify(currentData, null, 2), (resetErr) => {
+          if (resetErr) {
+            console.error('Error resetting JSON data:', resetErr);
+          } else {
+            console.log('JSON data has been reset to initial state:', target);
+          }
+        });
       });
     });
   });
@@ -79,16 +75,17 @@ const readJsonFile = (callback) => {
       return;
     }
     try {
-      const GamePlayers = JSON.parse(data).GameEvents.Game.PlayerStatistics.PlayerStatistic;
-      const Players = JSON.parse(data).GameEvents.Codes.Players.Player;
-      const Teams = JSON.parse(data).GameEvents.Codes.Teams.Team;
+      const parsed = JSON.parse(data);
+      const GamePlayers = parsed.GameEvents.Game.PlayerStatistics.PlayerStatistic;
+      const Players = parsed.GameEvents.Codes.Players.Player;
+      const Teams = parsed.GameEvents.Codes.Teams.Team;
 
       GamePlayers.forEach((a)=>{
         a.playerObject = Players.filter((b)=> b.Id === a.PlayerId)[0]
         a.playerTeam = Teams.filter((b)=> b.Id === a.playerObject.TeamId)[0]
         a.Position = a.playerObject.Position
       })
-      callback(null, JSON.parse(data));
+      callback(null, parsed);
     } catch (parseErr) {
       console.error('Error parsing JSON:', parseErr);
       callback(parseErr, null);
@@ -105,16 +102,17 @@ const readJsonFile2_match = (callback) => {
       return;
     }
     try {
-      const GamePlayers = JSON.parse(data).GameEvents.Game.PlayerStatistics.PlayerStatistic;
-      const Players = JSON.parse(data).GameEvents.Codes.Players.Player;
-      const Teams = JSON.parse(data).GameEvents.Codes.Teams.Team;
+      const parsed = JSON.parse(data);
+      const GamePlayers = parsed.GameEvents.Game.PlayerStatistics.PlayerStatistic;
+      const Players = parsed.GameEvents.Codes.Players.Player;
+      const Teams = parsed.GameEvents.Codes.Teams.Team;
 
       GamePlayers.forEach((a)=>{
         a.playerObject = Players.filter((b)=> b.Id === a.PlayerId)[0]
         a.playerTeam = Teams.filter((b)=> b.Id === a.playerObject.TeamId)[0]
         a.Position = a.playerObject.Position
       })
-      callback(null, JSON.parse(data));
+      callback(null, parsed);
     } catch (parseErr) {
       console.error('Error parsing JSON:', parseErr);
       callback(parseErr, null);
@@ -254,8 +252,8 @@ const AddGoal = new CronJob(
       console.log('Cron job executed at', new Date().toLocaleTimeString());
   
       // Exempel på att skriva till en fil med hjälp av fs
-      fs.appendFile('log.txt', `Cron job executed at ${new Date().toLocaleTimeString()}\n`, (err) => {
-        if (err) throw err;
+      fs.appendFile(logFilePath, `Cron job executed at ${new Date().toLocaleTimeString()}\n`, (err) => {
+        if (err) return console.error('Error writing log:', err);
         console.log('Log updated!');
       });
   
@@ -299,13 +297,12 @@ const AddGoal = new CronJob(
             periodNr = jsonData.GameEvents.Game.Periods.Period.length
           }
           //Add Goal and assist to players
-          const RandomGoalScoreIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
-          const RandomGoalAssistIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK' && p.TeamId === GamePlayers[RandomGoalScoreIndex].TeamId).length);
+          const Skaters = GamePlayers.filter((p) => p.Position !== 'GK');
+          const Scorer = Skaters[Math.floor(Math.random() * Skaters.length)];
+          const Assister = Skaters[Math.floor(Math.random() * Skaters.length)];
 
-
-
-          GamePlayers[RandomGoalScoreIndex].SkaterGame.G = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.G) + 1).toString()
-          GamePlayers[RandomGoalAssistIndex].SkaterGame.A = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.A) + 1).toString()
+          Scorer.SkaterGame.G = (parseInt(Scorer.SkaterGame.G) + 1).toString()
+          Assister.SkaterGame.A = (parseInt(Assister.SkaterGame.A) + 1).toString()
           //Add goal to players team
           console.log('Goals Home: '+jsonData.GameEvents.Game.GoalsHome)
           if(totalMinutes > 0){
@@ -346,8 +343,8 @@ const AddGoal = new CronJob(
 
         //add penalty
         if(randomNumberPenalty === 1 || randomNumberPenalty === 2 || randomNumberPenalty === 3){
-          const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
-          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PIM = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PIM) + 2).toString()
+          const PenaltyPlayer = Skaters[Math.floor(Math.random() * Skaters.length)];
+          PenaltyPlayer.SkaterGame.PIM = (parseInt(PenaltyPlayer.SkaterGame.PIM) + 2).toString()
           if(randomNumber === 1){
             jsonData.GameEvents.Game.PimHome = (parseInt(jsonData.GameEvents.Game.PimHome) + 2).toString()
           }else{
@@ -357,8 +354,8 @@ const AddGoal = new CronJob(
 
         //add Powerplay
         if(randomNumberPpwePlay === 1 || randomNumberPpwePlay === 2){
-          const RandomGoalPenaltyIndex = Math.floor(Math.random() * GamePlayers.filter((p) => p.Position !== 'GK').length);
-          GamePlayers[RandomGoalPenaltyIndex].SkaterGame.PPG = (parseInt(GamePlayers[RandomGoalScoreIndex].SkaterGame.PPG) + 5).toString()
+          const PowerPlayPlayer = Skaters[Math.floor(Math.random() * Skaters.length)];
+          PowerPlayPlayer.SkaterGame.PPG = (parseInt(PowerPlayPlayer.SkaterGame.PPG) + 5).toString()
           if(randomNumber === 1){
             jsonData.GameEvents.Game.PPPrcHome = (parseInt(jsonData.GameEvents.Game.PPPrcHome) + 5).toString()
           }else{
@@ -456,9 +453,8 @@ const AddGoal = new CronJob(
         //matchen restartar gått en timme 
         if(jsonData.GameEvents.Game.CurrentGameClock === '30:00' || periodNr > 3){
           console.log('STÄNGDE HÄR BÖRJAR DET')
-            AddGoal.stop();
-            resetJsonData();
-            AddGoal.start();
+            resetJsonData([jsonFilePath]);
+            return;
         }
         //ändra match status 
         if(jsonData.GameEvents.Game.CurrentGameClock === '29:00'){
@@ -473,7 +469,7 @@ const AddGoal = new CronJob(
             if (resetErr) {
               console.error('Error resetting JSON data:', resetErr);
             } else {
-              console.log('1 Goal added for ' + GamePlayers[RandomGoalScoreIndex].playerObject.Firstname);
+              console.log('1 Goal added for ' + Scorer.playerObject.Firstname);
             }
           });
         }
@@ -527,9 +523,8 @@ const AddGoal = new CronJob(
         //matchen restartar gått en timme 
         if(jsonData.GameEvents.Game.CurrentGameClock === '30:00'){
           console.log('STÄNGDE HÄR BÖRJAR DET')
-            AddGoal2.stop();
-            resetJsonData();
-            AddGoal2.start();
+            resetJsonData([jsonFilePath2]);
+            return;
         }
         jsonData.GameEvents.Game.CurrentGameClock = moment(jsonData.GameEvents.Game.CurrentGameClock, "mm:ss");
         jsonData.GameEvents.Game.CurrentGameClock = jsonData.GameEvents.Game.CurrentGameClock.add(1, 'minutes').format('mm:ss');
